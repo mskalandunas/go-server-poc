@@ -13,20 +13,15 @@ type Notification struct {
 }
 
 func handleGetNotifications(c echo.Context) error {
-	return c.JSON(http.StatusOK, &Notification{
+	return c.JSON(http.StatusOK, []Notification{{
 		Body: "Text",
 		Href: "https://google.com",
 		Icon: "ICON_IDENTIFIER",
-	})
-}
-
-func handleGet(c echo.Context) error {
-	return c.JSON(http.StatusOK, "Hello world!")
+	}})
 }
 
 func main() {
 	e := echo.New()
-	e.GET("/ping", handleGet)
 	e.GET("notifications", handleGetNotifications)
 	e.Logger.Fatal(e.Start(":3000"))
 }
